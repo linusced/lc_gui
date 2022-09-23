@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project("Project Name" VERSION 0.0.1 LANGUAGES C CXX)
+project("LC GUI" VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,6 +14,6 @@ add_subdirectory(external)
 add_subdirectory(src)
 
 set(OUT a.out)
-set(LINK_LIBS )
+set(LINK_LIBS lc_gui)
 
 add_subdirectory(app)

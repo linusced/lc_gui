@@ -6,7 +6,7 @@ set(FILES
     element/element.cpp element/resize.cpp element/inputs.cpp element/draw.cpp element/class_list.cpp element/container_mesh_border_radius.cpp element/container_mesh_border_width.cpp element/container_mesh_default.cpp
     basic_elements/button_element.cpp basic_elements/image_element.cpp basic_elements/slider_element.cpp basic_elements/text_element.cpp basic_elements/text_input_element.cpp)
 
-add_library(lc_gui STATIC ${FILES})
+add_library(lc_gui SHARED ${FILES})
 target_link_libraries(lc_gui PUBLIC stb ${CONAN_LIBS_GLAD} ${CONAN_LIBS_GLFW} ${CONAN_LIBS_GLM})
 target_include_directories(lc_gui PUBLIC include/)
 

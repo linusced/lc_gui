@@ -14,7 +14,6 @@ conan_basic_setup()
 add_subdirectory(external)
 add_subdirectory(src)
 
-
 if (BUILD_APP)
     add_subdirectory(config)
     set(OUT a.out)

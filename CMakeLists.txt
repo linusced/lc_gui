@@ -11,12 +11,12 @@ option(BUILD_APP "Build test application" OFF)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_subdirectory(config)
 add_subdirectory(external)
 add_subdirectory(src)
 
 
 if (BUILD_APP)
+    add_subdirectory(config)
     set(OUT a.out)
     set(LINK_LIBS lc_gui)
     add_subdirectory(app)

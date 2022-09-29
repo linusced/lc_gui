@@ -177,6 +177,10 @@ void lc_gui::TextElement::setText(const std::string &text)
         thread = std::make_unique<std::thread>(renderText, this);
     }
 }
+void lc_gui::TextElement::setCharacterColors(const std::vector<TextRenderer::CharacterColor> &characterColors)
+{
+    this->characterColors = characterColors;
+}
 
 void lc_gui::TextElement::updateCursorPos(int cursorPos)
 {
@@ -211,7 +215,7 @@ void lc_gui::TextElement::renderText(TextElement *instance)
 {
     instance->createdTextData = false;
 
-    instance->textRenderer.render(instance->text, instance->prevColor, instance->prevFontSize, instance->allowLineWrap ? instance->maxWidth : -1, instance->font);
+    instance->textRenderer.render(instance->text, instance->prevColor, instance->prevFontSize, instance->allowLineWrap ? instance->maxWidth : -1, instance->font, instance->characterColors);
 
     instance->createdTextData = true;
 }

@@ -18,6 +18,7 @@ namespace lc_gui
 
         const std::string &getText() const;
         void setText(const std::string &text);
+        void setCharacterColors(const std::vector<TextRenderer::CharacterColor> &characterColors);
 
         bool threadIsActive() const;
         void stopThread();
@@ -34,6 +35,7 @@ namespace lc_gui
         TextRenderer::Font *font;
         std::unique_ptr<Texture> textImg;
         std::string text;
+        std::vector<TextRenderer::CharacterColor> characterColors;
 
         TextRenderer textRenderer;
         std::vector<unsigned char> outputTextureBytes;

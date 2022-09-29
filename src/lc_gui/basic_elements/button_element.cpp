@@ -1,6 +1,6 @@
 #include "lc_gui/basic_elements/button_element.hpp"
 
-lc_gui::ButtonElement::ButtonElement(std::function<void(ButtonElement *)> clickCallback, const std::string &className, const std::string &clickClassStr)
+lc_gui::ButtonElement::ButtonElement(const std::string &className, const std::string &clickClassStr, std::function<void(ButtonElement *)> clickCallback)
     : Element(className), clickCallback(clickCallback), clickClassStr(clickClassStr) {}
 
 bool lc_gui::ButtonElement::inputs(const glm::ivec2 &relativeCursorPosition)

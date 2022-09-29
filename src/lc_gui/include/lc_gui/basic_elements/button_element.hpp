@@ -7,7 +7,7 @@ namespace lc_gui
     class ButtonElement : public Element
     {
     public:
-        ButtonElement(std::function<void(ButtonElement *)> clickCallback, const std::string &className, const std::string &clickClassStr = "");
+        ButtonElement(const std::string &className, const std::string &clickClassStr, std::function<void(ButtonElement *)> clickCallback);
 
         bool inputs(const glm::ivec2 &relativeCursorPosition) override;
 

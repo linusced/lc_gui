@@ -39,8 +39,6 @@ void lc_gui::TextElement::update()
 }
 void lc_gui::TextElement::resizeMesh(const Style &style, const Layout &layout, const glm::ivec2 &windowSize)
 {
-    bool debug = classList.contains("text-info");
-
     glm::ivec2 size = {layout.width, layout.height};
 
     glm::vec4 color = style.colorProperties.at("color").isSet ? style.colorProperties.at("color").value : glm::vec4(1);
@@ -75,12 +73,13 @@ void lc_gui::TextElement::resizeMesh(const Style &style, const Layout &layout, c
         return;
 
     outputTextureBytes = textRenderer.textureBytes;
-    for (unsigned long i = 0; i < outputTextureBytes.size(); i += 4)
-    {
-        outputTextureBytes[i] = 255 * color.r;
-        outputTextureBytes[i + 1] = 255 * color.g;
-        outputTextureBytes[i + 2] = 255 * color.b;
-    }
+    if (characterColors.empty())
+        for (unsigned long i = 0; i < outputTextureBytes.size(); i += 4)
+        {
+            outputTextureBytes[i] = 255 * color.r;
+            outputTextureBytes[i + 1] = 255 * color.g;
+            outputTextureBytes[i + 2] = 255 * color.b;
+        }
     prevColor = color;
 
     prevFontSize = fontSize;
@@ -214,9 +213,7 @@ const int &lc_gui::TextElement::getLineLayoutHeight(int lineIndex) const
 void lc_gui::TextElement::renderText(TextElement *instance)
 {
     instance->createdTextData = false;
-
     instance->textRenderer.render(instance->text, instance->prevColor, instance->prevFontSize, instance->allowLineWrap ? instance->maxWidth : -1, instance->font, instance->characterColors);
-
     instance->createdTextData = true;
 }
 

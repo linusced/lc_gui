@@ -223,11 +223,12 @@ void lc_gui::TextElement::renderText(TextElement *instance)
 void lc_gui::TextElement::continuousThread_func(TextElement *instance)
 {
     std::string prevText;
+    bool textInit{false};
     double prevChangeTime = glfwGetTime();
 
     while (instance->runContinuousThread)
     {
-        if (instance->text != prevText && instance->continuousThreadReady)
+        if ((instance->text != prevText || !textInit) && instance->continuousThreadReady)
         {
             instance->continuousThreadReady = false;
 
@@ -236,6 +237,7 @@ void lc_gui::TextElement::continuousThread_func(TextElement *instance)
             prevText = instance->text;
             instance->continuousThreadReady = false;
             prevChangeTime = glfwGetTime();
+            textInit = true;
         }
         else if (glfwGetTime() - prevChangeTime > 0.5)
         {

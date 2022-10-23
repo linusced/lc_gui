@@ -14,6 +14,16 @@ void lc_gui::KeyHandler::addKey(std::vector<GLenum> keyCombination, bool allowKe
     k.id = id;
     k.callback = callback;
 }
+void lc_gui::KeyHandler::addKey(std::vector<GLenum> keyCombination, std::function<void(int)> pressCallback, std::function<void(int)> releaseCallback, int id)
+{
+    keys.push_back(Key());
+    auto &k = keys.back();
+    k.keyCombination = keyCombination;
+    k.pressAndRelease = true;
+    k.id = id;
+    k.callback = pressCallback;
+    k.altCallback = releaseCallback;
+}
 
 void lc_gui::KeyHandler::update()
 {
@@ -39,7 +49,12 @@ void lc_gui::KeyHandler::update()
             else if (k.allowKeyPress && window->getCurrentTime() - k.keyDownTime > KEY_DOWN_PRESS_TIME)
                 k.callback(k.id);
         }
-        else
+        else if (k.keyDown)
+        {
             k.keyDown = false;
+
+            if (k.pressAndRelease)
+                k.altCallback(k.id);
+        }
     }
 }

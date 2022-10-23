@@ -10,6 +10,7 @@ namespace lc_gui
         KeyHandler(Window *window);
 
         void addKey(std::vector<GLenum> keyCombination, bool allowKeyPress, std::function<void(int)> callback, int id = -1);
+        void addKey(std::vector<GLenum> keyCombination, std::function<void(int)> pressCallback, std::function<void(int)> releaseCallback, int id = -1);
 
         void update();
 
@@ -21,9 +22,9 @@ namespace lc_gui
         struct Key
         {
             std::vector<GLenum> keyCombination;
-            bool allowKeyPress;
+            bool allowKeyPress{false}, pressAndRelease{false};
             int id;
-            std::function<void(int)> callback;
+            std::function<void(int)> callback, altCallback;
 
             bool keyDown{false};
             double keyDownTime;
